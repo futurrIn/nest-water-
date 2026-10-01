@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta stroke="theme-color" content="#040810">
+  
+  <title id="pageTitle">Product Details | NEST Water Technologies</title>
+  <meta name="description" content="Detailed specifications, custom capacity variants, and inquiry for NEST Water Technologies purifiers and filtration systems.">
+  <meta name="robots" content="index, follow">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header Nav -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo" aria-label="NEST Water Technologies Homepage">
+        <img src="assets/logo-exact.png" alt="NEST Water Technologies Logo" width="260" height="75">
+      </a>
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">HOME</a></li>
+          <li><a href="products.html" class="nav-link active">PRODUCTS</a></li>
+          <li><a href="about.html" class="nav-link">ABOUT US</a></li>
+          <li><a href="services.html" class="nav-link">SERVICES</a></li>
+          <li><a href="why-nest.html" class="nav-link">WHY NEST</a></li>
+          <li><a href="contact.html" class="nav-link">CONTACT US</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="tel:9496653866" class="btn btn-primary phone-cta-btn">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>94966 53866</span>
+        </a>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true">
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+      <li><a href="products.html" class="mobile-nav-link active">Products</a></li>
+      <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+      <li><a href="services.html" class="mobile-nav-link">Services</a></li>
+      <li><a href="why-nest.html" class="mobile-nav-link">Why Nest</a></li>
+      <li><a href="contact.html" class="mobile-nav-link">Contact Us</a></li>
+    </ul>
+  </div>
+
+  <main>
+    <!-- Product Detail Header & Showcase -->
+    <section style="padding: 3.5rem 0 4rem 0;">
+      <div class="container">
+        
+        <!-- Breadcrumbs -->
+        <div class="breadcrumb" style="margin-bottom: 2rem;">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <a href="products.html">Products Store</a>
+          <span class="breadcrumb-sep">/</span>
+          <span id="detailBreadcrumbTitle">NEST 9-Stage RO Purifier</span>
+        </div>
+
+        <div class="product-detail-grid">
+          <!-- Left: Gallery Display -->
+          <div class="detail-gallery-card">
+            <span class="product-badge-pill" id="detailBadge">Best Seller</span>
+            <div style="min-height: 320px; display: flex; align-items: center; justify-content: center;">
+              <img id="detailMainImg" src="assets/hero-purifier-clean.png" alt="Product Image" class="detail-main-img">
+            </div>
+            <div class="detail-gallery-thumbs" id="detailThumbs">
+              <button type="button" class="gallery-thumb-btn active" onclick="switchGalleryImg('assets/hero-purifier-clean.png', this)">
+                <img src="assets/hero-purifier-clean.png" alt="Front View">
+              </button>
+              <button type="button" class="gallery-thumb-btn" onclick="switchGalleryImg('assets/purifier-card.png', this)">
+                <img src="assets/purifier-card.png" alt="Side View">
+              </button>
+              <button type="button" class="gallery-thumb-btn" onclick="switchGalleryImg('assets/hero-purifier.png', this)">
+                <img src="assets/hero-purifier.png" alt="System Angle">
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Product Info & Variant Selection -->
+          <div class="detail-info-panel">
+            <div>
+              <div id="detailCategory" style="font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.4rem;">
+                Domestic RO Purifier
+              </div>
+              <h1 class="detail-product-title" id="detailTitle">NEST 9-STAGE RO+UV+UF+MINERALIZER</h1>
+            </div>
+
+            <div class="detail-rating-row">
+              <span class="rating-stars">★★★★★ 4.9</span>
+              <span style="color: var(--text-muted);">(120+ Kerala Installations)</span>
+              <span class="rating-badge">99.9% TDS Rejection</span>
+            </div>
+
+            <p id="detailDesc" style="color: var(--text-secondary); line-height: 1.7; font-size: 0.98rem;">
+              Smart wall-mounted Reverse Osmosis purifier with automated LED status display, active copper mineral balancer, high-flow booster pump, and leak-proof quick connect fittings engineered specifically for Kerala well and tap water conditions.
+            </p>
+
+            <!-- Key Feature Specs -->
+            <div class="detail-highlights-list" id="detailHighlights">
+              <div class="highlight-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>Reverse Osmosis (RO) Membrane</span>
+              </div>
+              <div class="highlight-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>Active Copper & Mineralizer</span>
+              </div>
+              <div class="highlight-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>UV Disinfection Chamber</span>
+              </div>
+              <div class="highlight-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>1 Year Complete Warranty</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Product Variant Picker Section (Strictly from Admin Page Data) -->
+            <div class="variant-picker-section" id="productVariantSection" style="display: none;">
+              <div class="variant-picker-title" id="variantLabel">SELECT VARIANT / CONFIGURATION:</div>
+              <div class="variant-btn-group" id="productVariantList">
+                <!-- Dynamically rendered from dbProduct.variants -->
+              </div>
+            </div>
+
+            <!-- Active Selected Config Summary -->
+            <div class="config-summary-box" id="configSummaryBox" style="display: none;">
+              Selected Configuration: <strong id="summaryText"></strong>
+            </div>
+
+            <!-- Action CTAs -->
+            <div class="detail-actions-row">
+              <a id="detailEnquireLink" href="contact.html?product=NEST+9-Stage+RO" class="btn btn-primary">
+                <span>Send Purchase Enquiry</span>
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </a>
+              <a id="detailWhatsappLink" href="https://wa.me/919496653866?text=Hi%20NEST%20Water,%20I%20would%20like%20information%20and%20pricing%20for%20NEST%209-Stage%20RO%20(12%20Liters%20Tank)." target="_blank" rel="noopener" class="btn btn-outline" style="border-color: #25D366; color: #25D366;">
+                <span>WhatsApp Order</span>
+              </a>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;">
+              <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.35rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Free On-Site Fitting in Kerala</span>
+              </div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.35rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>24-Hour Service Guarantee</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Technical Specification & Features Tab Section -->
+    <section style="padding: 4rem 0; background: rgba(13, 22, 39, 0.6); border-top: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span>SYSTEM DETAILS</span>
+          </div>
+          <h2 class="section-title">Technical Specifications &<br><span class="glow-text">Feature Matrix</span></h2>
+        </div>
+
+        <div class="comparison-table-wrapper" style="margin-top: 2rem;">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Specification Item</th>
+                <th>Engineering Details</th>
+              </tr>
+            </thead>
+            <tbody id="detailSpecsBody">
+              <tr>
+                <td><strong>Purification Technology</strong></td>
+                <td>Reverse Osmosis (RO) + Ultra Violet (UV) + Ultra Filtration (UF) + Active Mineralizer</td>
+              </tr>
+              <tr>
+                <td><strong>Purification Capacity</strong></td>
+                <td>Up to 15 Liters per Hour (at standard feed water pressure)</td>
+              </tr>
+              <tr>
+                <td><strong>Feed Water TDS Range</strong></td>
+                <td>Suitable for Raw Water TDS up to 2,000 PPM (Borewell, Well, Municipal Water)</td>
+              </tr>
+              <tr>
+                <td><strong>TDS Rejection Rate</strong></td>
+                <td>95% to 99.9% Heavy Contaminant & Heavy Metal Removal</td>
+              </tr>
+              <tr>
+                <td><strong>Membrane Type</strong></td>
+                <td>High-Rejection Thin Film Composite (TFC) 80 GPD Element</td>
+              </tr>
+              <tr>
+                <td><strong>Power Requirement</strong></td>
+                <td>230V AC, 50Hz (Consumes < 35W during active operation)</td>
+              </tr>
+              <tr>
+                <td><strong>On-Site Service Warranty</strong></td>
+                <td>1 Year Comprehensive Warranty + Free Filter Inspection & SLA</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- OTHER PRODUCTS RECOMMENDATION SECTION (E-Commerce Style) -->
+    <section class="recommendations-section">
+      <div class="container">
+        <div class="section-header center">
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            <span>STORE RECOMMENDATIONS</span>
+          </div>
+          <h2 class="section-title">Other Recommended<br><span class="glow-text">Purification Systems</span></h2>
+          <p class="section-subtitle">Explore popular water filters and dispensers trusted by Kerala homeowners and facilities.</p>
+        </div>
+
+        <div class="store-products-grid" style="margin-top: 3rem;" id="recommendationsGrid">
+
+          <!-- Recommended 1 -->
+          <a href="product-detail.html?id=under-sink-ro" class="glass-card product-card store-product-card">
+            <div class="product-badge-pill">Modular Kitchen</div>
+            <div class="product-image-box">
+              <img src="assets/purifier-card.png" alt="Under-Sink RO System">
+            </div>
+            <div class="product-category">Compact Under-Sink</div>
+            <h3 class="product-title">UNDER-SINK HIGH-FLOW RO SYSTEM</h3>
+            <p class="product-desc">Space-saving under-counter RO purifier with gooseneck stainless faucet.</p>
+            <div class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: auto; padding: 0.5rem 1rem; font-size: 0.82rem;">
+              <span>Explore Product</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </a>
+
+          <!-- Recommended 2 -->
+          <a href="product-detail.html?id=iron-removal-filter" class="glass-card product-card store-product-card">
+            <div class="product-badge-pill">Borewell Specialist</div>
+            <div class="product-image-box">
+              <img src="assets/filter-card.png" alt="Iron Removal Water Filter">
+            </div>
+            <div class="product-category">Whole-House Filter</div>
+            <h3 class="product-title">AUTOMATIC IRON REMOVAL FILTER</h3>
+            <p class="product-desc">FRP vessel media filter eliminating iron stains, yellow odor, and rust sediment.</p>
+            <div class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: auto; padding: 0.5rem 1rem; font-size: 0.82rem;">
+              <span>Explore Product</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </a>
+
+          <!-- Recommended 3 -->
+          <a href="product-detail.html?id=ss-dispenser" class="glass-card product-card store-product-card">
+            <div class="product-badge-pill">Office & Catering</div>
+            <div class="product-image-box">
+              <img src="assets/hero-purifier.png" alt="SS Water Dispenser">
+            </div>
+            <div class="product-category">SS Water Dispenser</div>
+            <h3 class="product-title">HOT, COLD & NORMAL SS DISPENSER</h3>
+            <p class="product-desc">Food-grade SS 304 multi-tap water dispenser unit for heavy daily use.</p>
+            <div class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: auto; padding: 0.5rem 1rem; font-size: 0.82rem;">
+              <span>Explore Product</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-Width Blue Bar CTA Banner (Above Footer) -->
+    <section class="enquiry-cta-bar">
+      <div class="container">
+        <div class="cta-bar-content">
+          <div class="cta-bar-text">
+            <h3 class="cta-bar-title">Need Water Purification Solutions or Service Support?</h3>
+            <p class="cta-bar-sub">Have a question about water purifiers, iron filters, or service requests? Our technical customer support team is available 24/7.</p>
+          </div>
+          <div class="cta-bar-action">
+            <a href="contact.html" class="btn btn-light cta-send-enquiry-btn" id="productDetailFooterEnquiryBtn">
+              <span>SEND ENQUIRY</span>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/logo-exact.png" alt="NEST Water Technologies Logo" width="260" height="75" loading="lazy">
+          <p>NEST WATER TECHNOLOGIES LLP provides pure water solutions, RO purifiers, high quality filters, and industrial water treatment systems with 24-hour service support.</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="about.html">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="why-nest.html">Why Nest</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Our Solutions</h4>
+          <div class="footer-links">
+            <a href="products.html#ro-purifiers">RO Water Purifiers</a>
+            <a href="products.html#water-filters">Iron Filter Systems</a>
+            <a href="products.html#industrial">Industrial Water Plants</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Contact Information</h4>
+          <div class="footer-links">
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Thachampara, Kerala 678593</p>
+            <p style="font-size: 1.1rem; font-weight: 700; color: var(--accent-cyan); margin-top: 0.5rem;">
+              <a href="tel:9496653866">94966 53866</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2025 NEST WATER TECHNOLOGIES LLP. All Rights Reserved.</div>
+        <a href="#siteHeader" class="back-to-top" id="backToTop"><span>Back to Top</span></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/store-db.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

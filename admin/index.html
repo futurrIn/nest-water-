@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Store Management Dashboard - NEST Water Technologies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Desktop PC Only Notice -->
+  <div class="desktop-only-warning">
+    <div class="desktop-warning-card">
+      <div class="desktop-warning-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      </div>
+      <h2 style="font-size: 1.5rem; color: #fff; margin-bottom: 0.75rem;">Desktop PC Required</h2>
+      <p style="color: var(--admin-text-sub); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+        The NEST Water Store Admin Dashboard is optimized exclusively for PC & Laptop screens. Please access this page on a desktop computer or expand your browser window width.
+      </p>
+      <a href="../index.html" class="btn-admin-secondary" style="display: inline-flex; justify-content: center;">
+        <span>&larr; Return to Public Website</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="admin-brand">
+      <img src="../assets/logo-exact.png" alt="NEST Water Technologies">
+      <span class="admin-brand-tag">STORE MANAGER</span>
+    </div>
+    <div class="admin-user-nav">
+      <a href="../products.html" target="_blank" class="btn-admin-secondary btn-admin-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <span>View Live Store</span>
+      </a>
+      <button type="button" onclick="openBackupModal()" class="btn-admin-secondary btn-admin-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Backup / Restore</span>
+      </button>
+      <button type="button" onclick="openPasswordModal()" class="btn-admin-secondary btn-admin-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>Security</span>
+      </button>
+      <button type="button" onclick="handleLogout()" class="btn-admin-danger btn-admin-sm">
+        <span>Logout</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="admin-container">
+
+    <!-- Metrics Row -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        </div>
+        <div>
+          <div class="metric-val" id="metricTotalProducts">0</div>
+          <div class="metric-lbl">Total Products</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+        </div>
+        <div>
+          <div class="metric-val" id="metricCategories">0</div>
+          <div class="metric-lbl">Active Categories</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <div class="metric-val" id="metricTotalVariants">0</div>
+          <div class="metric-lbl">Total Variants</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div>
+          <div class="metric-val" id="metricActiveProducts">0</div>
+          <div class="metric-lbl">Published Products</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Panel -->
+    <div class="admin-panel">
+      <!-- Toolbar -->
+      <div class="panel-toolbar">
+        <div class="search-filter-box">
+          <input type="text" id="searchInput" class="admin-input" placeholder="Search product title, specs or description..." onkeyup="filterProducts()">
+          <select id="categoryFilter" class="admin-select" onchange="filterProducts()">
+            <option value="all">All Categories</option>
+          </select>
+          <select id="statusFilter" class="admin-select" onchange="filterProducts()">
+            <option value="all">All Status</option>
+            <option value="active">Active Only</option>
+            <option value="draft">Drafts Only</option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button type="button" onclick="openWebPModal()" class="btn-admin-secondary" style="border-color: rgba(0, 210, 255, 0.35); color: var(--admin-accent-cyan);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span>⚡ WebP Converter Tool</span>
+          </button>
+          <button type="button" onclick="openCategoryModal()" class="btn-admin-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            <span>Categories</span>
+          </button>
+          <button type="button" onclick="openNewProductModal()" class="btn-admin">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            <span>+ Add New Product</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Products Table -->
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th style="width: 70px;">Image</th>
+              <th>Product Title & ID</th>
+              <th>Category</th>
+              <th>Variants</th>
+              <th>Status</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productsTableBody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Product Add/Edit Modal -->
+  <div class="admin-modal-backdrop" id="productModal">
+    <div class="admin-modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="productModalTitle">Add New Product</h3>
+        <button type="button" class="modal-close-btn" onclick="closeProductModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Tabs Nav -->
+        <div class="modal-tabs">
+          <button type="button" class="tab-btn active" onclick="switchTab('tabBasic', this)">1. Basic Info</button>
+          <button type="button" class="tab-btn" onclick="switchTab('tabVariants', this)">2. Variants & Options</button>
+          <button type="button" class="tab-btn" onclick="switchTab('tabSpecs', this)">3. Specs & Features</button>
+          <button type="button" class="tab-btn" onclick="switchTab('tabImages', this)">4. Media & Gallery</button>
+        </div>
+
+        <form id="productForm">
+          <input type="hidden" id="prodEditId">
+
+          <!-- Tab 1: Basic Info -->
+          <div class="tab-pane active" id="tabBasic">
+            <div class="form-group">
+              <label for="prodTitle" class="form-label">Product Title *</label>
+              <input type="text" id="prodTitle" class="admin-input" placeholder="e.g. NEST 10-STAGE ALKALINE RO PURIFIER" required>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="prodCategory" class="form-label">Category *</label>
+                <select id="prodCategory" class="admin-select" style="width: 100%;" required>
+                  <!-- Populated dynamically -->
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="prodStatus" class="form-label">Publishing Status *</label>
+                <select id="prodStatus" class="admin-select" style="width: 100%;">
+                  <option value="active">Active / Published</option>
+                  <option value="draft">Draft / Hidden</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="prodBadge" class="form-label">Badge Tag (Optional)</label>
+                <input type="text" id="prodBadge" class="admin-input" placeholder="e.g. Best Seller, New Model, 99.9% TDS Rejection">
+              </div>
+
+              <div class="form-group">
+                <label for="prodSlug" class="form-label">Custom URL Slug (Optional)</label>
+                <input type="text" id="prodSlug" class="admin-input" placeholder="e.g. nest-10-stage-alkaline-ro">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="prodDesc" class="form-label">Product Summary Description *</label>
+              <textarea id="prodDesc" class="admin-input" rows="4" placeholder="Enter detailed product summary..." required></textarea>
+            </div>
+          </div>
+
+          <!-- Tab 2: Variants & Pricing -->
+          <div class="tab-pane" id="tabVariants">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <span style="font-size: 0.88rem; color: var(--admin-text-sub);">Configure capacity options, technology packages & pricing.</span>
+              <button type="button" onclick="addVariantRow()" class="btn-admin-secondary btn-admin-sm">
+                <span>+ Add Variant</span>
+              </button>
+            </div>
+
+            <div id="variantsContainer">
+              <!-- Dynamic Variant Rows -->
+            </div>
+          </div>
+
+          <!-- Tab 3: Specs & Features -->
+          <div class="tab-pane" id="tabSpecs">
+            <div class="form-group">
+              <label for="prodHighlights" class="form-label">Feature Highlights (One per line)</label>
+              <textarea id="prodHighlights" class="admin-input" rows="5" placeholder="9-Stage Advanced Purification Process&#10;Reverse Osmosis (RO) Rejection Membrane&#10;Active Copper & Essential Mineralizer"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Technical Specification Key-Value Pairs</label>
+              <div id="specsContainer">
+                <!-- Dynamic Specs Key-Value Rows -->
+              </div>
+              <button type="button" onclick="addSpecRow()" class="btn-admin-secondary btn-admin-sm" style="margin-top: 0.5rem;">
+                <span>+ Add Specification Pair</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab 4: Media & Gallery -->
+          <div class="tab-pane" id="tabImages">
+            <input type="hidden" id="prodMainImage">
+            <textarea id="prodGallery" style="display: none;"></textarea>
+
+            <!-- 1. Primary Cover Image (Live Priority #1) -->
+            <div class="form-group" style="background: rgba(0, 210, 255, 0.04); border: 1px solid rgba(0, 210, 255, 0.25); border-radius: 12px; padding: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <label class="form-label" style="margin: 0; color: #fff; font-size: 1rem; font-weight: 700;">1. Primary Cover Image</label>
+                <span class="priority-cover-badge">#1 Priority (Shown First on Live Page)</span>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--admin-text-sub); margin-bottom: 0.85rem;">The first uploaded image will automatically be displayed as the main hero photo on the live product detail page.</p>
+
+              <!-- Drag & Drop Zone -->
+              <div class="image-upload-dropzone" id="coverDropzone" onclick="document.getElementById('coverFileInput').click()" ondragover="event.preventDefault(); this.classList.add('dragover');" ondragleave="this.classList.remove('dragover');" ondrop="handleCoverDrop(event);">
+                <input type="file" id="coverFileInput" accept="image/*" style="display: none;" onchange="handleCoverImageUpload(event)">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--admin-accent-cyan)" stroke-width="2" style="margin: 0 auto 0.5rem auto;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <div style="font-size: 0.92rem; font-weight: 700; color: #fff;">Click to Browse or Drag & Drop Cover Image</div>
+                <div style="font-size: 0.78rem; color: var(--admin-text-sub); margin-top: 0.25rem;">Auto-converts to WebP, reduces file size, and saves to assets folder!</div>
+              </div>
+
+              <div id="coverPreviewContainer"></div>
+            </div>
+
+            <!-- 2. Auto-Detected Variant Specific Images -->
+            <div class="form-group" style="margin-top: 1.75rem;">
+              <label class="form-label" style="color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">2. Variant Specific Images (Auto-Detected from Tab 2)</label>
+              <p style="font-size: 0.82rem; color: var(--admin-text-sub); margin-bottom: 0.85rem;">Each variant defined in Tab 2 gets its own dedicated WebP image uploader below.</p>
+              <div id="variantUploadsContainer" class="variant-upload-grid">
+                <!-- Auto-populated via renderVariantUploaders() -->
+              </div>
+            </div>
+
+            <!-- 3. Additional Gallery Images -->
+            <div class="form-group" style="margin-top: 1.75rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <label class="form-label" style="margin: 0; color: #fff; font-size: 1rem; font-weight: 700;">3. Additional Gallery Showcase Images</label>
+                <label class="btn-admin-secondary btn-admin-sm" style="cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  <span>+ Upload Gallery WebP Images</span>
+                  <input type="file" accept="image/*" multiple style="display: none;" onchange="handleGalleryImageUpload(event)">
+                </label>
+              </div>
+              <div id="galleryPreviewContainer" style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.75rem;"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-admin-secondary" onclick="closeProductModal()">Cancel</button>
+        <button type="button" class="btn-admin" onclick="saveProductForm()">Save Product</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category Manager Modal -->
+  <div class="admin-modal-backdrop" id="categoryModal">
+    <div class="admin-modal-content" style="max-width: 550px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Manage Categories</h3>
+        <button type="button" class="modal-close-btn" onclick="closeCategoryModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="categoryForm" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+          <input type="text" id="newCatName" class="admin-input" placeholder="Category Name (e.g. UV Filters)" required>
+          <button type="submit" class="btn-admin" style="white-space: nowrap;">+ Add</button>
+        </form>
+
+        <div id="categoryListContainer">
+          <!-- Dynamic Category List -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Backup & Restore Modal -->
+  <div class="admin-modal-backdrop" id="backupModal">
+    <div class="admin-modal-content" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Database Backup & Restore</h3>
+        <button type="button" class="modal-close-btn" onclick="closeBackupModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom: 1.5rem; background: rgba(255,255,255,0.03); padding: 1.25rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+          <h4 style="margin: 0 0 0.5rem 0; color: #fff;">1. Export Store Catalog Backup</h4>
+          <p style="margin: 0 0 1rem 0; font-size: 0.85rem; color: var(--admin-text-sub);">Download a JSON file containing all products, categories, variants, and specifications.</p>
+          <button type="button" onclick="exportBackupJSON()" class="btn-admin-secondary">
+            <span>Download Catalog JSON</span>
+          </button>
+        </div>
+
+        <div style="margin-bottom: 1.5rem; background: rgba(255,255,255,0.03); padding: 1.25rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+          <h4 style="margin: 0 0 0.5rem 0; color: #fff;">2. Restore Catalog From JSON</h4>
+          <p style="margin: 0 0 1rem 0; font-size: 0.85rem; color: var(--admin-text-sub);">Upload a previously exported JSON backup file to overwrite/restore store data.</p>
+          <input type="file" id="importFileInput" accept=".json" class="admin-input" style="margin-bottom: 0.75rem;">
+          <button type="button" onclick="importBackupJSON()" class="btn-admin">
+            <span>Restore From File</span>
+          </button>
+        </div>
+
+        <div style="background: rgba(255, 77, 79, 0.08); padding: 1.25rem; border-radius: 10px; border: 1px solid rgba(255, 77, 79, 0.2);">
+          <h4 style="margin: 0 0 0.5rem 0; color: #ff4d4f;">3. Reset Store Data to Default Seed</h4>
+          <p style="margin: 0 0 1rem 0; font-size: 0.85rem; color: var(--admin-text-sub);">Reset products and categories back to original factory defaults.</p>
+          <button type="button" onclick="resetDefaults()" class="btn-admin-danger">
+            <span>Reset Factory Defaults</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Security / Password Modal -->
+  <div class="admin-modal-backdrop" id="passwordModal">
+    <div class="admin-modal-content" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Security & Password</h3>
+        <button type="button" class="modal-close-btn" onclick="closePasswordModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="passwordForm">
+          <div class="form-group">
+            <label for="currPass" class="form-label">Current Password *</label>
+            <input type="password" id="currPass" class="admin-input" required>
+          </div>
+          <div class="form-group">
+            <label for="newPass" class="form-label">New Password * (Min 6 chars)</label>
+            <input type="password" id="newPass" class="admin-input" required minlength="6">
+          </div>
+          <div class="form-group">
+            <label for="confirmPass" class="form-label">Confirm New Password *</label>
+            <input type="password" id="confirmPass" class="admin-input" required minlength="6">
+          </div>
+          <button type="submit" class="btn-admin" style="width: 100%; justify-content: center;">Update Password</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Standalone WebP Image Converter Tool Modal -->
+  <div class="admin-modal-backdrop" id="webpToolModal">
+    <div class="admin-modal-content" style="max-width: 680px;">
+      <div class="modal-header">
+        <h3 class="modal-title" style="display: flex; align-items: center; gap: 0.5rem;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--admin-accent-cyan)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span>WebP Image Converter & Optimizer Tool</span>
+        </h3>
+        <button type="button" class="modal-close-btn" onclick="closeWebPModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom: 1.25rem;">
+          <p style="font-size: 0.9rem; color: var(--admin-text-sub); margin-bottom: 1rem;">Select or drop any PNG, JPG, or JPEG images below. Our built-in browser engine will automatically convert them to lightweight <strong>.webp</strong> files, optimize resolution (max 800px), and download them to save in your project's <code>assets/</code> folder!</p>
+
+          <div class="image-upload-dropzone" id="toolDropzone" onclick="document.getElementById('toolFileInput').click()" ondragover="event.preventDefault(); this.classList.add('dragover');" ondragleave="this.classList.remove('dragover');" ondrop="handleToolDrop(event);">
+            <input type="file" id="toolFileInput" accept="image/*" multiple style="display: none;" onchange="handleToolImageUpload(event)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--admin-accent-cyan)" stroke-width="2" style="margin: 0 auto 0.5rem auto;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <div style="font-size: 1.05rem; font-weight: 700; color: #fff;">Click to Browse or Drag & Drop Images Here</div>
+            <div style="font-size: 0.82rem; color: var(--admin-text-sub); margin-top: 0.35rem;">Supports PNG, JPG, JPEG, GIF, BMP, WEBP, AVIF</div>
+          </div>
+        </div>
+
+        <div id="toolResultsContainer" style="display: flex; flex-direction: column; gap: 0.75rem; max-height: 260px; overflow-y: auto;">
+          <!-- Converted WebP files list -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-admin-secondary" onclick="closeWebPModal()">Close Tool</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="admin-toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="../js/store-db.js"></script>
+  <script src="../js/admin-auth.js"></script>
+  <script>
+    // Route Guard
+    document.addEventListener('DOMContentLoaded', () => {
+      window.adminAuth.checkAuthOrRedirect();
+      initDashboard();
+    });
+
+    let currentProducts = [];
+    let currentCategories = [];
+
+    function initDashboard() {
+      loadData();
+      renderMetrics();
+      renderCategoryDropdowns();
+      filterProducts();
+    }
+
+    function loadData() {
+      currentProducts = window.storeDB.getProducts();
+      currentCategories = window.storeDB.getCategories();
+    }
+
+    function renderMetrics() {
+      document.getElementById('metricTotalProducts').textContent = currentProducts.length;
+      document.getElementById('metricCategories').textContent = currentCategories.length;
+      
+      let variantCount = 0;
+      let activeCount = 0;
+      currentProducts.forEach(p => {
+        if (Array.isArray(p.variants)) variantCount += p.variants.length;
+        if (p.status === 'active') activeCount++;
+      });
+
+      document.getElementById('metricTotalVariants').textContent = variantCount;
+      document.getElementById('metricActiveProducts').textContent = activeCount;
+    }
+
+    function renderCategoryDropdowns() {
+      const filterSelect = document.getElementById('categoryFilter');
+      const formSelect = document.getElementById('prodCategory');
+      
+      let filterHTML = '<option value="all">All Categories</option>';
+      let formHTML = '';
+
+      currentCategories.forEach(cat => {
+        filterHTML += `<option value="${cat.id}">${cat.name}</option>`;
+        formHTML += `<option value="${cat.id}">${cat.name}</option>`;
+      });
+
+      filterSelect.innerHTML = filterHTML;
+      formSelect.innerHTML = formHTML;
+    }
+
+    function filterProducts() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const catVal = document.getElementById('categoryFilter').value;
+      const statusVal = document.getElementById('statusFilter').value;
+
+      const filtered = currentProducts.filter(p => {
+        const matchesQuery = p.title.toLowerCase().includes(query) ||
+                             p.description.toLowerCase().includes(query) ||
+                             p.id.toLowerCase().includes(query);
+        const matchesCat = (catVal === 'all') || (p.category === catVal);
+        const matchesStatus = (statusVal === 'all') || (p.status === statusVal);
+
+        return matchesQuery && matchesCat && matchesStatus;
+      });
+
+      renderProductsTable(filtered);
+    }
+
+    function renderProductsTable(products) {
+      const tbody = document.getElementById('productsTableBody');
+      if (!products || products.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--admin-text-sub); padding: 3rem;">No matching products found. Click "+ Add New Product" to create one.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = products.map(p => {
+        const catObj = currentCategories.find(c => c.id === p.category) || { name: p.category };
+        const mainImg = (p.images && p.images.length > 0) ? p.images[0] : '../assets/hero-purifier-clean.png';
+        const variantCount = Array.isArray(p.variants) ? p.variants.length : 0;
+        
+        let priceRange = 'N/A';
+        if (variantCount > 0) {
+          const prices = p.variants.map(v => v.price).filter(n => typeof n === 'number');
+          if (prices.length > 0) {
+            const min = Math.min(...prices);
+            const max = Math.max(...prices);
+            priceRange = (min === max) ? `₹${min.toLocaleString()}` : `₹${min.toLocaleString()} - ₹${max.toLocaleString()}`;
+          }
+        }
+
+        return `
+          <tr>
+            <td><img src="../${mainImg}" class="prod-thumb" alt="${p.title}" onerror="this.src='../assets/hero-purifier-clean.png'"></td>
+            <td>
+              <div style="font-weight: 700; color: #fff;">${p.title}</div>
+              <div style="font-size: 0.78rem; color: var(--admin-text-sub); margin-top: 2px;">ID: ${p.id}</div>
+            </td>
+            <td><span class="cat-pill">${catObj.name}</span></td>
+            <td>
+              <div style="font-size: 0.88rem; font-weight: 600; color: var(--admin-accent-cyan);">${variantCount} Variant Option(s)</div>
+            </td>
+            <td>
+              <span class="badge-status ${p.status}">${p.status}</span>
+            </td>
+            <td style="text-align: right;">
+              <button type="button" onclick="editProduct('${p.id}')" class="btn-admin-secondary btn-admin-sm">Edit</button>
+              <button type="button" onclick="duplicateProduct('${p.id}')" class="btn-admin-secondary btn-admin-sm">Copy</button>
+              <button type="button" onclick="deleteProduct('${p.id}')" class="btn-admin-danger btn-admin-sm">Delete</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // --- Product Modal Logic ---
+    function openNewProductModal() {
+      document.getElementById('productModalTitle').textContent = 'Add New Product';
+      document.getElementById('productForm').reset();
+      document.getElementById('prodEditId').value = '';
+      
+      document.getElementById('variantsContainer').innerHTML = '';
+      document.getElementById('specsContainer').innerHTML = '';
+      if (document.getElementById('coverPreviewContainer')) document.getElementById('coverPreviewContainer').innerHTML = '';
+      if (document.getElementById('galleryPreviewContainer')) document.getElementById('galleryPreviewContainer').innerHTML = '';
+      
+      addVariantRow(); // Add 1 default variant row
+      addSpecRow();    // Add 1 default spec row
+
+      switchTab('tabBasic', document.querySelector('.modal-tabs .tab-btn'));
+      document.getElementById('productModal').classList.add('open');
+    }
+
+    function editProduct(id) {
+      const p = window.storeDB.getProductById(id);
+      if (!p) return;
+
+      document.getElementById('productModalTitle').textContent = 'Edit Product: ' + p.title;
+      document.getElementById('prodEditId').value = p.id;
+      document.getElementById('prodTitle').value = p.title || '';
+      document.getElementById('prodCategory').value = p.category || '';
+      document.getElementById('prodStatus').value = p.status || 'active';
+      document.getElementById('prodBadge').value = p.badge || '';
+      document.getElementById('prodSlug').value = p.id || '';
+      document.getElementById('prodDesc').value = p.description || '';
+
+      // Highlights & Images
+      document.getElementById('prodHighlights').value = Array.isArray(p.highlights) ? p.highlights.join('\n') : '';
+      document.getElementById('prodMainImage').value = (p.images && p.images[0]) ? p.images[0] : '';
+      document.getElementById('prodGallery').value = (p.images && p.images.length > 1) ? p.images.slice(1).join('\n') : '';
+      renderCoverPreview(document.getElementById('prodMainImage').value);
+      renderGalleryPreviews();
+
+      // Variants
+      const vContainer = document.getElementById('variantsContainer');
+      vContainer.innerHTML = '';
+      if (Array.isArray(p.variants) && p.variants.length > 0) {
+        p.variants.forEach(v => addVariantRow(v));
+      } else {
+        addVariantRow();
+      }
+
+      // Specs
+      const sContainer = document.getElementById('specsContainer');
+      sContainer.innerHTML = '';
+      if (p.specs && typeof p.specs === 'object') {
+        Object.entries(p.specs).forEach(([k, val]) => addSpecRow(k, val));
+      } else {
+        addSpecRow();
+      }
+
+      switchTab('tabBasic', document.querySelector('.modal-tabs .tab-btn'));
+      document.getElementById('productModal').classList.add('open');
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').classList.remove('open');
+    }
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+
+      if (tabId === 'tabImages') {
+        renderVariantUploaders();
+        renderCoverPreview(document.getElementById('prodMainImage').value);
+        renderGalleryPreviews();
+      }
+    }
+
+    function addVariantRow(data = {}) {
+      const container = document.getElementById('variantsContainer');
+      const div = document.createElement('div');
+      div.className = 'variant-card-item';
+      div.setAttribute('data-image', data.image || '');
+      div.innerHTML = `
+        <div style="display: grid; grid-template-columns: 1.2fr 1.5fr 120px auto; gap: 1rem; align-items: end;">
+          <div>
+            <label class="form-label">Capacity / Size Variant</label>
+            <input type="text" class="admin-input var-cap" placeholder="e.g. 12 Liters Tank" value="${data.capacity || ''}" oninput="renderVariantUploaders()">
+          </div>
+          <div>
+            <label class="form-label">Technology / Spec Variant</label>
+            <input type="text" class="admin-input var-tech" placeholder="e.g. Alkaline + Copper Boost" value="${data.technology || ''}" oninput="renderVariantUploaders()">
+          </div>
+          <div style="padding-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem;">
+            <input type="checkbox" class="var-stock" style="width: 18px; height: 18px; cursor: pointer;" ${data.inStock !== false ? 'checked' : ''}>
+            <label style="font-size: 0.88rem; font-weight: 600; color: #fff; cursor: pointer; white-space: nowrap;">In Stock</label>
+          </div>
+          <div>
+            <button type="button" onclick="this.closest('.variant-card-item').remove(); renderVariantUploaders();" class="btn-admin-danger btn-admin-sm" style="padding: 0.75rem 1rem;">Remove</button>
+          </div>
+        </div>
+      `;
+      container.appendChild(div);
+      renderVariantUploaders();
+    }
+
+    function addSpecRow(key = '', val = '') {
+      const container = document.getElementById('specsContainer');
+      const div = document.createElement('div');
+      div.className = 'spec-row-grid';
+      div.innerHTML = `
+        <input type="text" class="admin-input spec-key" placeholder="Spec Name (e.g. TDS Rejection)" value="${key}">
+        <input type="text" class="admin-input spec-val" placeholder="Spec Value (e.g. Up to 99.9%)" value="${val}">
+        <button type="button" onclick="this.parentElement.remove()" class="btn-admin-danger btn-admin-sm" style="padding: 0.75rem;">X</button>
+      `;
+      container.appendChild(div);
+    }
+
+    function saveProductForm() {
+      const editId = document.getElementById('prodEditId').value;
+      const title = document.getElementById('prodTitle').value.trim();
+      const category = document.getElementById('prodCategory').value;
+      const status = document.getElementById('prodStatus').value;
+      const badge = document.getElementById('prodBadge').value.trim();
+      const slug = document.getElementById('prodSlug').value.trim();
+      const desc = document.getElementById('prodDesc').value.trim();
+
+      if (!title || !desc) {
+        showToast('Please fill in required fields (Title & Description)', 'error');
+        return;
+      }
+
+      // Collect Variants
+      const variantItems = document.querySelectorAll('.variant-card-item');
+      const variants = [];
+      variantItems.forEach((item, index) => {
+        const cap = item.querySelector('.var-cap').value.trim();
+        const tech = item.querySelector('.var-tech').value.trim();
+        const varImg = item.getAttribute('data-image') || '';
+        const inStock = item.querySelector('.var-stock').checked;
+
+        if (cap || tech || varImg) {
+          variants.push({
+            id: 'v-' + (index + 1),
+            capacity: cap || 'Standard Unit',
+            technology: tech || 'Standard Tech',
+            image: varImg,
+            inStock: inStock
+          });
+        }
+      });
+
+      // Collect Specs
+      const specsObj = {};
+      document.querySelectorAll('#specsContainer > div').forEach(row => {
+        const k = row.querySelector('.spec-key').value.trim();
+        const v = row.querySelector('.spec-val').value.trim();
+        if (k && v) specsObj[k] = v;
+      });
+
+      // Collect Images
+      const mainImg = document.getElementById('prodMainImage').value.trim() || 'assets/hero-purifier-clean.png';
+      const galleryText = document.getElementById('prodGallery').value.trim();
+      const galleryArr = galleryText ? galleryText.split('\n').map(s => s.trim()).filter(Boolean) : [];
+      const images = [mainImg, ...galleryArr];
+
+      // Collect Highlights
+      const hText = document.getElementById('prodHighlights').value.trim();
+      const highlights = hText ? hText.split('\n').map(s => s.trim()).filter(Boolean) : [];
+
+      const productData = {
+        id: editId || (slug ? slug : 'prod-' + Date.now()),
+        title,
+        category,
+        status,
+        badge,
+        description: desc,
+        variants,
+        specs: specsObj,
+        images,
+        highlights
+      };
+
+      window.storeDB.saveProduct(productData);
+      closeProductModal();
+      initDashboard();
+      showToast(editId ? 'Product updated successfully!' : 'New product created successfully!', 'success');
+    }
+
+    function duplicateProduct(id) {
+      if (confirm('Create a duplicate copy of this product?')) {
+        window.storeDB.duplicateProduct(id);
+        initDashboard();
+        showToast('Product duplicated!', 'success');
+      }
+    }
+
+    function deleteProduct(id) {
+      if (confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
+        window.storeDB.deleteProduct(id);
+        initDashboard();
+        showToast('Product deleted!', 'success');
+      }
+    }
+
+    // --- Category Modal Logic ---
+    function openCategoryModal() {
+      renderCategoryList();
+      document.getElementById('categoryModal').classList.add('open');
+    }
+
+    function closeCategoryModal() {
+      document.getElementById('categoryModal').classList.remove('open');
+    }
+
+    function renderCategoryList() {
+      const container = document.getElementById('categoryListContainer');
+      container.innerHTML = currentCategories.map(cat => `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; margin-bottom: 0.5rem;">
+          <div>
+            <div style="font-weight: 700; color: #fff;">${cat.name}</div>
+            <div style="font-size: 0.75rem; color: var(--admin-text-sub);">ID: ${cat.id}</div>
+          </div>
+          <button type="button" onclick="deleteCategory('${cat.id}')" class="btn-admin-danger btn-admin-sm">Delete</button>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('categoryForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('newCatName').value.trim();
+      if (!name) return;
+
+      const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      window.storeDB.saveCategory({ id, name });
+      document.getElementById('newCatName').value = '';
+      initDashboard();
+      renderCategoryList();
+      showToast('Category added!', 'success');
+    });
+
+    function deleteCategory(id) {
+      if (confirm('Delete this category? Products in this category will remain.')) {
+        window.storeDB.deleteCategory(id);
+        initDashboard();
+        renderCategoryList();
+        showToast('Category deleted', 'success');
+      }
+    }
+
+    // --- Backup & Restore Modal ---
+    function openBackupModal() {
+      document.getElementById('backupModal').classList.add('open');
+    }
+
+    function closeBackupModal() {
+      document.getElementById('backupModal').classList.remove('open');
+    }
+
+    function exportBackupJSON() {
+      const jsonStr = window.storeDB.exportCatalogJSON();
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `nest_water_catalog_${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Catalog exported!', 'success');
+    }
+
+    function importBackupJSON() {
+      const fileInput = document.getElementById('importFileInput');
+      if (!fileInput.files || fileInput.files.length === 0) {
+        showToast('Please select a JSON file to restore', 'error');
+        return;
+      }
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const res = window.storeDB.importCatalogJSON(e.target.result);
+        if (res.success) {
+          initDashboard();
+          closeBackupModal();
+          showToast(res.message, 'success');
+        } else {
+          showToast(res.message, 'error');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function resetDefaults() {
+      if (confirm('Are you sure you want to reset all products and categories back to factory defaults? Custom data will be lost.')) {
+        window.storeDB.resetToDefaults();
+        initDashboard();
+        closeBackupModal();
+        showToast('Store reset to defaults!', 'success');
+      }
+    }
+
+    // --- Password Modal ---
+    function openPasswordModal() {
+      document.getElementById('passwordModal').classList.add('open');
+    }
+
+    function closePasswordModal() {
+      document.getElementById('passwordModal').classList.remove('open');
+    }
+
+    document.getElementById('passwordForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const curr = document.getElementById('currPass').value;
+      const newP = document.getElementById('newPass').value;
+      const conf = document.getElementById('confirmPass').value;
+
+      if (newP !== conf) {
+        showToast('New passwords do not match!', 'error');
+        return;
+      }
+
+      const res = await window.adminAuth.updatePassword(curr, newP);
+      if (res.success) {
+        document.getElementById('passwordForm').reset();
+        closePasswordModal();
+        showToast(res.message, 'success');
+      } else {
+        showToast(res.message, 'error');
+      }
+    });
+
+    function handleLogout() {
+      window.adminAuth.logout();
+      window.location.href = 'login.html';
+    }
+
+    // Toast Utility
+    function showToast(msg, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `admin-toast ${type}`;
+      toast.textContent = msg;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3500);
+    }
+
+    // =========================================================================
+    // Core WebP Conversion & Upload Engine
+    // =========================================================================
+    function processImageFileToWebP(file, callback, options = {}) {
+      if (!file || !file.type.startsWith('image/')) {
+        showToast('Please select a valid image file (PNG, JPG, WEBP, etc.)', 'error');
+        return;
+      }
+
+      const maxWidth = options.maxWidth || 800;
+      const maxHeight = options.maxHeight || 800;
+      const quality = options.quality || 0.85;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth || height > maxHeight) {
+            if (width / height > maxWidth / maxHeight) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            } else {
+              width = Math.round((width * maxHeight) / height);
+              height = maxHeight;
+            }
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const webpDataUrl = canvas.toDataURL('image/webp', quality);
+          const origSizeKB = Math.round(file.size / 1024);
+          const webpSizeKB = Math.round((webpDataUrl.length * (3 / 4)) / 1024);
+          const savingsPct = Math.round(((origSizeKB - webpSizeKB) / origSizeKB) * 100);
+
+          const baseName = file.name.substring(0, file.name.lastIndexOf('.')).toLowerCase().replace(/[^a-z0-9]/g, '_');
+          const webpFileName = `${baseName}_optimized.webp`;
+
+          // Auto-trigger download of converted .webp file for project folder
+          const downloadLink = document.createElement('a');
+          downloadLink.href = webpDataUrl;
+          downloadLink.download = webpFileName;
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+
+          showToast(`Converted & Saved WebP! (${origSizeKB} KB → ${webpSizeKB} KB, -${savingsPct > 0 ? savingsPct : 0}%)`, 'success');
+
+          if (typeof callback === 'function') {
+            callback(webpDataUrl, webpFileName, { origSizeKB, webpSizeKB, savingsPct, width, height });
+          }
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Cover Image Handlers
+    function handleCoverImageUpload(e) {
+      const file = e.target.files && e.target.files[0];
+      if (file) {
+        processImageFileToWebP(file, function(dataUrl, fileName, stats) {
+          document.getElementById('prodMainImage').value = dataUrl;
+          renderCoverPreview(dataUrl, fileName, stats);
+        });
+      }
+    }
+
+    function handleCoverDrop(e) {
+      e.preventDefault();
+      document.getElementById('coverDropzone').classList.remove('dragover');
+      const file = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (file) {
+        processImageFileToWebP(file, function(dataUrl, fileName, stats) {
+          document.getElementById('prodMainImage').value = dataUrl;
+          renderCoverPreview(dataUrl, fileName, stats);
+        });
+      }
+    }
+
+    function renderCoverPreview(url, fileName, stats) {
+      const container = document.getElementById('coverPreviewContainer');
+      if (!container) return;
+      if (!url) {
+        container.innerHTML = '';
+        return;
+      }
+      container.innerHTML = `
+        <div class="img-preview-card">
+          <img src="${url}" class="img-preview-thumb" alt="WebP Cover Preview" onerror="this.src='../assets/hero-purifier-clean.png'">
+          <div style="flex: 1;">
+            <div style="font-weight: 700; font-size: 0.88rem; color: #fff;">${fileName || 'Primary Cover WebP Image'}</div>
+            <div style="margin-top: 0.2rem;">
+              <span class="webp-stats-badge">Priority #1 Cover ${stats ? '(' + stats.webpSizeKB + ' KB)' : ''}</span>
+            </div>
+          </div>
+          <button type="button" onclick="document.getElementById('prodMainImage').value=''; renderCoverPreview('');" class="btn-admin-danger btn-admin-sm" style="padding: 0.35rem 0.6rem;">&times; Remove</button>
+        </div>
+      `;
+    }
+
+    // Auto-Rendered Variant Uploaders in Tab 4
+    function renderVariantUploaders() {
+      const container = document.getElementById('variantUploadsContainer');
+      if (!container) return;
+
+      const variantItems = document.querySelectorAll('.variant-card-item');
+      if (variantItems.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1/-1; padding: 1rem; color: var(--admin-text-sub); font-size: 0.88rem; background: rgba(255,255,255,0.02); border-radius: 8px;">No variants added in Tab 2 yet. Add a variant in Tab 2 to upload custom variant images!</div>`;
+        return;
+      }
+
+      container.innerHTML = Array.from(variantItems).map((item, index) => {
+        const cap = item.querySelector('.var-cap') ? item.querySelector('.var-cap').value.trim() : '';
+        const tech = item.querySelector('.var-tech') ? item.querySelector('.var-tech').value.trim() : '';
+        const varImg = item.getAttribute('data-image') || '';
+        const labelText = `Var ${index + 1}: ${cap || 'Standard Unit'} ${tech ? ' (' + tech + ')' : ''}`;
+
+        return `
+          <div class="variant-upload-card" data-variant-index="${index}">
+            <div>
+              <div style="font-weight: 700; font-size: 0.92rem; color: #fff; margin-bottom: 0.25rem;">${labelText}</div>
+              <div style="font-size: 0.78rem; color: var(--admin-text-sub);">Custom WebP photo for ${cap || 'Var ' + (index + 1)}</div>
+            </div>
+            
+            ${varImg ? `
+              <div style="display: flex; align-items: center; gap: 0.75rem; background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 8px; border: 1px solid rgba(0,210,255,0.3);">
+                <img src="${varImg}" style="width: 48px; height: 48px; border-radius: 6px; object-fit: cover; background: #000;" onerror="this.src='../assets/hero-purifier-clean.png'">
+                <div style="flex: 1; overflow: hidden;">
+                  <span class="webp-stats-badge" style="font-size: 0.7rem; padding: 0.2rem 0.5rem;">WebP Assigned</span>
+                </div>
+                <button type="button" onclick="removeVariantImage(${index})" class="btn-admin-danger btn-admin-sm" style="padding: 0.35rem 0.6rem; font-size: 0.75rem;">&times;</button>
+              </div>
+            ` : ''}
+
+            <label class="btn-admin-secondary btn-admin-sm" style="cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.35rem; width: 100%;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span>${varImg ? 'Change Var-' + (index + 1) + ' Image' : '⚡ Upload Var-' + (index + 1) + ' WebP'}</span>
+              <input type="file" accept="image/*" style="display: none;" onchange="handleVarSpecificImageUpload(event, ${index})">
+            </label>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleVarSpecificImageUpload(e, index) {
+      const file = e.target.files && e.target.files[0];
+      if (file) {
+        processImageFileToWebP(file, function(dataUrl) {
+          const variantItems = document.querySelectorAll('.variant-card-item');
+          if (variantItems[index]) {
+            variantItems[index].setAttribute('data-image', dataUrl);
+            renderVariantUploaders();
+          }
+        });
+      }
+    }
+
+    function removeVariantImage(index) {
+      const variantItems = document.querySelectorAll('.variant-card-item');
+      if (variantItems[index]) {
+        variantItems[index].setAttribute('data-image', '');
+        renderVariantUploaders();
+      }
+    }
+
+    // Gallery Image Handlers
+    function handleGalleryImageUpload(e) {
+      const files = Array.from(e.target.files || []);
+      files.forEach(file => {
+        processImageFileToWebP(file, function(dataUrl) {
+          const galleryText = document.getElementById('prodGallery');
+          const currentVal = galleryText.value.trim();
+          galleryText.value = currentVal ? currentVal + '\n' + dataUrl : dataUrl;
+          renderGalleryPreviews();
+        });
+      });
+    }
+
+    function renderGalleryPreviews() {
+      const container = document.getElementById('galleryPreviewContainer');
+      const galleryVal = document.getElementById('prodGallery').value.trim();
+      if (!container) return;
+      if (!galleryVal) {
+        container.innerHTML = '<div style="font-size: 0.85rem; color: var(--admin-text-sub);">No gallery showcase images uploaded yet.</div>';
+        return;
+      }
+
+      const urls = galleryVal.split('\n').filter(u => u.trim());
+      container.innerHTML = urls.map((u, idx) => `
+        <div style="position: relative; display: inline-block;">
+          <img src="${u.trim()}" style="width: 70px; height: 70px; border-radius: 8px; object-fit: cover; border: 1px solid rgba(0,210,255,0.3); background: #000;" onerror="this.src='../assets/hero-purifier-clean.png'">
+          <button type="button" onclick="removeGalleryImage(${idx})" style="position: absolute; top: -6px; right: -6px; background: #ff4d4f; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 12px; font-weight: bold; display: flex; align-items: center; justify-content: center;">&times;</button>
+        </div>
+      `).join('');
+    }
+
+    function removeGalleryImage(idx) {
+      const galleryText = document.getElementById('prodGallery');
+      const urls = galleryText.value.trim().split('\n').filter(u => u.trim());
+      urls.splice(idx, 1);
+      galleryText.value = urls.join('\n');
+      renderGalleryPreviews();
+    }
+
+    // Standalone WebP Tool Modal Handlers
+    function openWebPModal() {
+      document.getElementById('webpToolModal').classList.add('open');
+    }
+
+    function closeWebPModal() {
+      document.getElementById('webpToolModal').classList.remove('open');
+    }
+
+    function handleToolImageUpload(e) {
+      const files = Array.from(e.target.files || []);
+      files.forEach(file => {
+        processImageFileToWebP(file, function(dataUrl, fileName, stats) {
+          addToolResultItem(dataUrl, fileName, stats);
+        });
+      });
+    }
+
+    function handleToolDrop(e) {
+      e.preventDefault();
+      document.getElementById('toolDropzone').classList.remove('dragover');
+      const files = Array.from(e.dataTransfer.files || []);
+      files.forEach(file => {
+        processImageFileToWebP(file, function(dataUrl, fileName, stats) {
+          addToolResultItem(dataUrl, fileName, stats);
+        });
+      });
+    }
+
+    function addToolResultItem(dataUrl, fileName, stats) {
+      const container = document.getElementById('toolResultsContainer');
+      if (!container) return;
+      const div = document.createElement('div');
+      div.className = 'img-preview-card';
+      div.innerHTML = `
+        <img src="${dataUrl}" class="img-preview-thumb" alt="Converted WebP">
+        <div style="flex: 1;">
+          <div style="font-weight: 700; font-size: 0.9rem; color: #fff;">${fileName}</div>
+          <div style="font-size: 0.8rem; color: var(--admin-text-sub); margin-top: 0.15rem;">
+            Orig: ${stats.origSizeKB} KB &rarr; <span style="color: #10b981; font-weight: 700;">WebP: ${stats.webpSizeKB} KB (-${stats.savingsPct}%)</span>
+          </div>
+        </div>
+        <button type="button" onclick="navigator.clipboard.writeText('assets/${fileName}'); showToast('Asset path copied to clipboard!', 'success');" class="btn-admin-secondary btn-admin-sm">Copy Path</button>
+      `;
+      container.prepend(div);
+    }
+  </script>
+</body>
+</html>

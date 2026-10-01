@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - NEST Water Technologies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Desktop PC Only Notice -->
+  <div class="desktop-only-warning">
+    <div class="desktop-warning-card">
+      <div class="desktop-warning-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      </div>
+      <h2 style="font-size: 1.5rem; color: #fff; margin-bottom: 0.75rem;">Desktop PC Required</h2>
+      <p style="color: var(--admin-text-sub); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+        The NEST Water Store Admin Dashboard is optimized exclusively for PC & Laptop screens. Please access this page on a desktop computer or expand your browser window width.
+      </p>
+      <a href="../index.html" class="btn-admin-secondary" style="display: inline-flex; justify-content: center;">
+        <span>&larr; Return to Public Website</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <img src="../assets/logo-exact.png" alt="NEST Water Technologies" class="login-logo">
+      
+      <div style="margin-bottom: 2rem;">
+        <h2 style="margin: 0 0 0.35rem 0; font-size: 1.5rem; color: #fff;">Store Administrator</h2>
+        <p style="margin: 0; color: var(--admin-text-sub); font-size: 0.88rem;">Sign in to manage products, categories & variants</p>
+      </div>
+
+      <div id="loginAlert" style="display: none; background: rgba(255, 77, 79, 0.15); border: 1px solid rgba(255, 77, 79, 0.3); color: #ff4d4f; padding: 0.75rem; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1.5rem; text-align: left;">
+      </div>
+
+      <form id="adminLoginForm">
+        <div class="form-group" style="text-align: left;">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" id="username" class="admin-input" placeholder="Enter admin username" required autocomplete="username">
+        </div>
+
+        <div class="form-group" style="text-align: left; position: relative;">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="admin-input" placeholder="Enter password" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn-admin" style="width: 100%; justify-content: center; padding: 0.85rem; font-size: 1rem; margin-top: 1rem;">
+          <span>AUTHENTICATE & LOG IN</span>
+        </button>
+      </form>
+
+      <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.25rem;">
+        <a href="../index.html" class="btn-admin-secondary" style="font-size: 0.82rem; width: 100%; justify-content: center; box-sizing: border-box;">
+          <span>&larr; Back to Public Store Website</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/admin-auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Auto redirect if already authenticated
+      if (window.adminAuth && window.adminAuth.isLoggedIn()) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const loginForm = document.getElementById('adminLoginForm');
+      const loginAlert = document.getElementById('loginAlert');
+
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        loginAlert.style.display = 'none';
+
+        const result = await window.adminAuth.login(username, password);
+        if (result.success) {
+          window.location.href = 'index.html';
+        } else {
+          loginAlert.textContent = result.message;
+          loginAlert.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
