@@ -36,8 +36,82 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <!-- Custom Stylesheet with Cache Busting -->
+  <link rel="stylesheet" href="styles.css?v=20261027_04">
+
+  <style>
+    /* Mobile Single Row Trust Indicators Enforcement */
+    @media (max-width: 768px) {
+      .hero-trust-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        grid-auto-flow: column !important;
+        align-items: stretch !important;
+        gap: 0.5rem !important;
+        width: 100% !important;
+        max-width: 480px !important;
+        margin: 1.5rem auto 0 !important;
+        padding-top: 1.25rem !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+      }
+      .trust-item {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        text-align: center !important;
+        gap: 0.35rem !important;
+        padding: 0 0.2rem !important;
+      }
+      .trust-icon-box {
+        width: 42px !important;
+        height: 42px !important;
+        min-width: 42px !important;
+        border-radius: 10px !important;
+        background: rgba(0, 210, 255, 0.1) !important;
+        border: 1px solid rgba(0, 210, 255, 0.28) !important;
+        color: var(--accent-cyan, #00d2ff) !important;
+        margin: 0 auto 0.25rem auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+      }
+      .trust-icon-box svg {
+        width: 20px !important;
+        height: 20px !important;
+      }
+      .trust-text-val {
+        font-family: var(--font-heading, 'Outfit', sans-serif) !important;
+        font-size: 0.92rem !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        line-height: 1.2 !important;
+      }
+      .trust-text-lbl {
+        font-size: 0.68rem !important;
+        color: rgba(180, 210, 245, 0.75) !important;
+        line-height: 1.25 !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .trust-icon-box {
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+      }
+      .trust-icon-box svg {
+        width: 18px !important;
+        height: 18px !important;
+      }
+      .trust-text-val {
+        font-size: 0.85rem !important;
+      }
+      .trust-text-lbl {
+        font-size: 0.63rem !important;
+      }
+    }
+  </style>
 
   <!-- JSON-LD LocalBusiness Structured Data -->
   <script type="application/ld+json">
@@ -823,22 +897,6 @@
         </a>
       </div>
     </div>
-  </div>
-
-  <!-- Sticky Mobile Conversion Bar -->
-  <div class="mobile-bottom-bar">
-    <a href="tel:9496653866" class="btn btn-primary">
-      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-      </svg>
-      <span>CALL NOW</span>
-    </a>
-    <a href="#contact" class="btn btn-outline">
-      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      </svg>
-      <span>FREE QUOTE</span>
-    </a>
   </div>
 
   <!-- JavaScript -->
