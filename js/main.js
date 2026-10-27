@@ -616,9 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="product-image-box">
               <img src="${mainImg}" alt="${p.title}">
             </div>
-            <div class="product-category">${catObj.name}</div>
             <h3 class="product-title">${p.title}</h3>
-            <p class="product-desc">${p.description}</p>
             
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
               ${optionsTag}

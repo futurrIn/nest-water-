@@ -2899,31 +2899,19 @@ textarea.form-control {
 }
 
 .store-product-card .product-category {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--accent-cyan);
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 0.25rem;
+  display: none !important;
 }
 
 .store-product-card .product-title {
   font-size: 1.05rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.6rem;
   line-height: 1.35;
 }
 
 .store-product-card .product-desc {
-  font-size: 0.84rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin-bottom: 0.85rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  display: none !important;
 }
 
 .product-badge-pill {
@@ -3712,17 +3700,8 @@ textarea.form-control {
   }
 
   /* Category Label */
-  .product-category,
   .store-product-card .product-category {
-    font-size: 0.6rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.5px !important;
-    margin-bottom: 0.2rem !important;
-    color: var(--accent-cyan) !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    text-transform: uppercase !important;
+    display: none !important;
   }
 
   /* Title with 2-line clamp */
@@ -3741,16 +3720,8 @@ textarea.form-control {
   }
 
   /* Description */
-  .product-desc,
   .store-product-card .product-desc {
-    font-size: 0.68rem !important;
-    color: rgba(180, 210, 245, 0.72) !important;
-    line-height: 1.35 !important;
-    margin-bottom: 0.45rem !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
+    display: none !important;
   }
 
   /* Feature spec pills */
@@ -4046,8 +4017,7 @@ textarea.form-control {
     font-size: 0.78rem !important;
   }
 
-  .product-desc,
-  .store-product-card .product-desc {
+  .product-desc {
     font-size: 0.65rem !important;
   }
 }
